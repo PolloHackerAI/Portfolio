@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo di Michael Tranchino</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        main {
+            padding-top: 4rem; /* Space for fixed header */
+        }
+
+        section {
+            margin: 3rem 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #388E3C;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Specific styles for the sections and cards */
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 20px;
+            border-radius: 10px;
+            background-color: #e0e0e0;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #4caf50;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="container mx-auto px-6 py-4">
+        <ul class="flex justify-center space-x-8">
+            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="aboutBtn">About</button></li>
+            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="educationBtn">Education</button></li>
+            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="skillsBtn">Skills</button></li>
+            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="experiencesBtn">Experiences</button></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container" id="content"></div>
+</main>
+
+<footer class="bg-green-800 text-white py-4 text-center">
+    &copy; 2024 Michael Tranchino. Tutti i diritti riservati.
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const personalInfo = {
+    name: "Michael Tranchino",
+    title: "Aspiring Software Developer",
+    email: "Tranchino.michael@studenti-ittfedifermi.edu.it",
+    phone: "+39 347 7439323",
+    location: "Via Rosa Luxemburg 39 PT, Italy",
+    dateOfBirth: "14th June, 2006",
+    nationality: "Italian",
+    about: "Passionate and skilled student with a strong foundation in various programming languages and technologies. Eager to apply my knowledge and continue learning in the field of software development."
+  };
+
+  const education = [
+    {
+      school: "I.T.T.S. 'Silvano Fedi - Enrico Fermi'",
+      period: "Sept. 2020 - June 2025",
+      description: "Currently pursuing advanced studies in Information Technology and Computer Science."
+    },
+    {
+      school: "Scuole medie Giulio Cesare Melani",
+      period: "Sept. 2017 - June 2020",
+      description: "Completed middle school education, laying the foundation for further studies in technology."
+    }
+  ];
+
+  const skills = [
+    { name: "C/C++/C#", level: 90 },
+    { name: "Java", level: 85 },
+    { name: "Lua", level: 80 },
+    { name: "HTML/CSS", level: 80 },
+    { name: "JavaScript", level: 80 },
+    { name: "Python", level: 75 },
+    { name: "Visual Programming", level: 70 },
+    { name: "Swift", level: 66 },
+    { name: "MS-DOS", level: 65 },
+    { name: "Assembly x8086", level: 60 }
+  ];
+
+  const experiences = [
+    {
+      title: "UNITY Course",
+      period: "23rd Jan. 2024 to 31st Mar. 2024",
+      description: "Participated in an intensive Unity development course, gaining hands-on experience in game development and 3D application creation."
+    },
+    {
+      title: "School-Work Experience",
+      period: "3rd June 2024 to 21st June 2024",
+      description: "Worked in an intense workplace, where I learned about the Modbus protocol, low-level development with Codesys; moreover, I learned a lot about working long hours and managing heavy workload."
+    }
+  ];
+
+  function createSection(id, title, content) {
+    const section = document.createElement('section');
+    section.id = id;
+    section.className = 'mb-20';
+    const h2 = document.createElement('h2');
+    h2.className = 'text-3xl font-bold mb-8';
+    h2.textContent = title;
+    section.appendChild(h2);
+    section.appendChild(content);
+    return section;
+  }
+
+  function createCard(title, subtitle, content) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const cardTitle = document.createElement('h3');
+    cardTitle.className = 'text-xl font-semibold mb-2';
+    cardTitle.textContent = title;
+    const cardSubtitle = document.createElement('p');
+    cardSubtitle.className = 'text-gray-600 mb-4';
+    cardSubtitle.textContent = subtitle;
+    const cardContent = document.createElement('p');
+    cardContent.textContent = content;
+
+    card.appendChild(cardTitle);
+    card.appendChild(cardSubtitle);
+    card.appendChild(cardContent);
+    return card;
+  }
+
+  function createSkillBar(skill) {
+    const skillDiv = document.createElement('div');
+    skillDiv.className = 'mb-4';
+
+    // Skill name and level
+    const skillInfo = document.createElement('div');
+    skillInfo.className = 'flex justify-between mb-1';
+    const skillName = document.createElement('span');
+    skillName.className = 'text-lg font-medium';
+    skillName.textContent = skill.name;
+    const skillLevel = document.createElement('span');
+    skillLevel.className = 'text-lg font-medium';
+    skillLevel.textContent = `${skill.level}%`;
+    skillInfo.appendChild(skillName);
+    skillInfo.appendChild(skillLevel);
+
+    // Progress bar
+    const progressBar = document.createElement('div');
+    progressBar.className = 'bg-gray-200 rounded-full h-2.5';
+    const progress = document.createElement('div');
+    progress.className = 'bg-indigo-600 h-2.5 rounded-full';
+    progress.style.width = `${skill.level}%`;
+    progressBar.appendChild(progress);
+
+    // Combine everything
+    skillDiv.appendChild(skillInfo);
+    skillDiv.appendChild(progressBar);
+    return skillDiv;
+  }
+
+  function createAboutSection() {
+    const aboutContent = document.createElement('div');
+    aboutContent.className = 'bg-white bg-opacity-80 backdrop-blur-md rounded-lg shadow-md p-8';
+    aboutContent.innerHTML = `
+      <div class="flex flex-col md:flex-row items-center md:items-start">
+        <img src="/placeholder.svg?height=200&width=200" alt="${personalInfo.name}" class="w-48 h-48 rounded-full object-cover mb-6 md:mb-0 md:mr-8">
+        <div>
+          <h1 class="text-4xl font-bold mb-2">${personalInfo.name}</h1>
+          <h2 class="text-2xl text-indigo-600 mb-4">${personalInfo.title}</h2>
+          <p class="text-lg mb-4">${personalInfo.about}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <p><strong>Email:</strong> ${personalInfo.email}</p>
+              <p><strong>Phone:</strong> ${personalInfo.phone}</p>
+            </div>
+            <div>
+              <p><strong>Location:</strong> ${personalInfo.location}</p>
+              <p><strong>Date of Birth:</strong> ${personalInfo.dateOfBirth}</p>
+              <p><strong>Nationality:</strong> ${personalInfo.nationality}</p>
+            </div>
+          </div>
+          <div class="flex space-x-4">
+            <button  onclick= " "class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Email</button>
+            <button href =" https://github.com/PolloHackerAI/PolloHackerAI" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900">GitHub</button>
+            <button href =" https://www.linkedin.com/in/michael-tranchino-86330a2ab/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">LinkedIn</button>
+          </div>
+        </div>
+      </div>
+    `;
+    return createSection('about', 'About', aboutContent);
+  }
+
+  function createEducationSection() {
+    const educationContent = document.createElement('div');
+    education.forEach(edu => {
+      educationContent.appendChild(createCard(edu.school, edu.period, edu.description));
+    });
+    return createSection('education', 'Education', educationContent);
+  }
+
+  function createSkillsSection() {
+    const skillsContent = document.createElement('div');
+    skills.forEach(skill => {
+      const skillBar = createSkillBar(skill);
+      skillsContent.appendChild(skillBar);
+    });
+    return createSection('skills', 'Skills', skillsContent);
+  }
+
+  function createExperiencesSection() {
+    const experiencesContent = document.createElement('div');
+    experiences.forEach(exp => {
+      experiencesContent.appendChild(createCard(exp.title, exp.period, exp.description));
+    });
+    return createSection('experiences', 'Experiences', experiencesContent);
+  }
+
+  function loadContent() {
+    const content = document.getElementById('content');
+    content.appendChild(createAboutSection());
+    content.appendChild(createEducationSection());
+    content.appendChild(createSkillsSection());
+    content.appendChild(createExperiencesSection());
+  }
+
+  // Scroll to section on button click
+  document.getElementById('aboutBtn').onclick = () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('educationBtn').onclick = () => document.getElementById('education').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('skillsBtn').onclick = () => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('experiencesBtn').onclick = () => document.getElementById('experiences').scrollIntoView({ behavior: 'smooth' });
+
+  // Load initial content
+  loadContent();
+});
+</script>
+
+</body>
+</html>
