@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,11 +6,11 @@
     <title>Profilo di Michael Tranchino</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
-        /* Custom styles */
+        /* Tema scuro */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
+            background-color: #121212;
+            color: #E0E0E0;
             margin: 0;
         }
 
@@ -28,59 +26,38 @@
             left: 0;
             right: 0;
             z-index: 50;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            background-color: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
             padding: 1rem 0;
         }
 
         main {
-            padding-top: 4rem; /* Space for fixed header */
-        }
-
-        section {
-            margin: 3rem 0;
+            padding-top: 5rem;
         }
 
         h2 {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            color: #388E3C;
+            color: #BB86FC;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 0.375rem;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Specific styles for the sections and cards */
         .card {
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: #1E1E1E;
+            color: #E0E0E0;
             border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             padding: 2rem;
             margin-bottom: 2rem;
         }
 
-        .progress-bar {
-            height: 20px;
-            border-radius: 10px;
-            background-color: #e0e0e0;
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 0.5rem;
         }
 
-        .progress {
-            height: 100%;
-            border-radius: 10px;
-            background-color: #4caf50;
-            text-align: center;
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -88,10 +65,11 @@
 <header>
     <nav class="container mx-auto px-6 py-4">
         <ul class="flex justify-center space-x-8">
-            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="aboutBtn">About</button></li>
-            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="educationBtn">Education</button></li>
-            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="skillsBtn">Skills</button></li>
-            <li><button class="text-lg text-gray-600 hover:text-indigo-600" id="experiencesBtn">Experiences</button></li>
+            <li><button class="text-lg text-gray-300 hover:text-indigo-400" id="aboutBtn">About</button></li>
+            <li><button class="text-lg text-gray-300 hover:text-indigo-400" id="educationBtn">Education</button></li>
+            <li><button class="text-lg text-gray-300 hover:text-indigo-400" id="skillsBtn">Skills</button></li>
+            <li><button class="text-lg text-gray-300 hover:text-indigo-400" id="experiencesBtn">Experiences</button></li>
+            <li><button class="text-lg text-gray-300 hover:text-indigo-400" id="certificationsBtn">Certificati</button></li>
         </ul>
     </nav>
 </header>
@@ -100,7 +78,7 @@
     <div class="container" id="content"></div>
 </main>
 
-<footer class="bg-green-800 text-white py-4 text-center">
+<footer class="bg-gray-900 text-white py-4 text-center">
     &copy; 2024 Michael Tranchino. Tutti i diritti riservati.
 </footer>
 
@@ -156,6 +134,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  const certifications = [
+    {
+      title: "Python for Deep Learning: Build Neural Networks in Python",
+      instructors: "Meta Brains, Skool of AI",
+      file: "./certificato-python.pdf", // Percorso del file locale
+      reference: "0004"
+    },
+    {
+      title: "Graphics Design and Video Editing Course for Beginners",
+      instructors: "Ben Kemp, Zechariah Tech",
+      file: "./certificato-graphics.pdf", // Percorso del file locale
+      reference: "0004"
+    }
+  ];
+
   function createSection(id, title, content) {
     const section = document.createElement('section');
     section.id = id;
@@ -175,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cardTitle.className = 'text-xl font-semibold mb-2';
     cardTitle.textContent = title;
     const cardSubtitle = document.createElement('p');
-    cardSubtitle.className = 'text-gray-600 mb-4';
+    cardSubtitle.className = 'text-gray-400 mb-4';
     cardSubtitle.textContent = subtitle;
     const cardContent = document.createElement('p');
     cardContent.textContent = content;
@@ -190,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillDiv = document.createElement('div');
     skillDiv.className = 'mb-4';
 
-    // Skill name and level
     const skillInfo = document.createElement('div');
     skillInfo.className = 'flex justify-between mb-1';
     const skillName = document.createElement('span');
@@ -202,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     skillInfo.appendChild(skillName);
     skillInfo.appendChild(skillLevel);
 
-    // Progress bar
     const progressBar = document.createElement('div');
     progressBar.className = 'bg-gray-200 rounded-full h-2.5';
     const progress = document.createElement('div');
@@ -210,21 +201,33 @@ document.addEventListener('DOMContentLoaded', () => {
     progress.style.width = `${skill.level}%`;
     progressBar.appendChild(progress);
 
-    // Combine everything
     skillDiv.appendChild(skillInfo);
     skillDiv.appendChild(progressBar);
     return skillDiv;
   }
 
+  function createCertificationCard(cert) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <h3 class="text-2xl font-semibold">${cert.title}</h3>
+        <p class="text-gray-400 mb-4">Insegnanti: ${cert.instructors}</p>
+        <p>Numero di riferimento: ${cert.reference}</p>
+        <!-- Visualizzazione PDF -->
+        <iframe src="${cert.file}" title="Certificato ${cert.title}"></iframe>
+    `;
+    return card;
+  }
+
   function createAboutSection() {
     const aboutContent = document.createElement('div');
-    aboutContent.className = 'bg-white bg-opacity-80 backdrop-blur-md rounded-lg shadow-md p-8';
+    aboutContent.className = 'bg-gray-800 bg-opacity-90 rounded-lg shadow-md p-8';
     aboutContent.innerHTML = `
       <div class="flex flex-col md:flex-row items-center md:items-start">
         <img src="/placeholder.svg?height=200&width=200" alt="${personalInfo.name}" class="w-48 h-48 rounded-full object-cover mb-6 md:mb-0 md:mr-8">
         <div>
           <h1 class="text-4xl font-bold mb-2">${personalInfo.name}</h1>
-          <h2 class="text-2xl text-indigo-600 mb-4">${personalInfo.title}</h2>
+          <h2 class="text-2xl text-indigo-400 mb-4">${personalInfo.title}</h2>
           <p class="text-lg mb-4">${personalInfo.about}</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -236,11 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
               <p><strong>Date of Birth:</strong> ${personalInfo.dateOfBirth}</p>
               <p><strong>Nationality:</strong> ${personalInfo.nationality}</p>
             </div>
-          </div>
-          <div class="flex space-x-4">
-            <button  onclick= " "class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Email</button>
-            <button href =" https://github.com/PolloHackerAI/PolloHackerAI" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900">GitHub</button>
-            <button href =" https://www.linkedin.com/in/michael-tranchino-86330a2ab/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">LinkedIn</button>
           </div>
         </div>
       </div>
@@ -259,8 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function createSkillsSection() {
     const skillsContent = document.createElement('div');
     skills.forEach(skill => {
-      const skillBar = createSkillBar(skill);
-      skillsContent.appendChild(skillBar);
+      skillsContent.appendChild(createSkillBar(skill));
     });
     return createSection('skills', 'Skills', skillsContent);
   }
@@ -273,21 +270,29 @@ document.addEventListener('DOMContentLoaded', () => {
     return createSection('experiences', 'Experiences', experiencesContent);
   }
 
+  function createCertificationsSection() {
+    const certificationsContent = document.createElement('div');
+    certifications.forEach(cert => {
+      certificationsContent.appendChild(createCertificationCard(cert));
+    });
+    return createSection('certifications', 'Certificati', certificationsContent);
+  }
+
   function loadContent() {
     const content = document.getElementById('content');
     content.appendChild(createAboutSection());
     content.appendChild(createEducationSection());
     content.appendChild(createSkillsSection());
     content.appendChild(createExperiencesSection());
+    content.appendChild(createCertificationsSection());
   }
 
-  // Scroll to section on button click
   document.getElementById('aboutBtn').onclick = () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
   document.getElementById('educationBtn').onclick = () => document.getElementById('education').scrollIntoView({ behavior: 'smooth' });
   document.getElementById('skillsBtn').onclick = () => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
   document.getElementById('experiencesBtn').onclick = () => document.getElementById('experiences').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('certificationsBtn').onclick = () => document.getElementById('certifications').scrollIntoView({ behavior: 'smooth' });
 
-  // Load initial content
   loadContent();
 });
 </script>
